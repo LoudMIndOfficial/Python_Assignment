@@ -27,8 +27,6 @@ class ParentWindow(Frame):
         self.txtFName = Entry(self.master, text=self.varFName, font=("Helvetica", 16), fg='black', bg='lightgray')
         self.txtFName.grid(row=0, column=1, padx=(30,0), pady=(30,0))
         
-
-
         self.btnSubmit = Button(self.master, text="Submit", width=10, height=2, command=self.submit)
         self.btnSubmit.grid(row=2,column=1, padx=(30,0), pady=(30,0), sticky=NE)
 
@@ -36,7 +34,7 @@ class ParentWindow(Frame):
         self.btnCancel.grid(row=2,column=1, padx=(30,90), pady=(30,0), sticky=NE)
 
         
-
+        
         #write-html.py
     def submit(self):
         f = open("Amazing_Summer_Deals.html", "w")
@@ -45,11 +43,11 @@ class ParentWindow(Frame):
         customText = self.txtFName.get()
         message ="""<html>\
         <head></head>\
-        <body> <h1>This IS MY TEXT. <br> THIS IS YOUR TEXT:"+customText+"</h1></body>\
+        <body> <h1>This IS MY TEXT. <br> THIS IS YOUR TEXT:"""+customText+"""</h1></body>\
         </html>"""
        
        
-
+       
         f.write(message)
         f.close()
 
