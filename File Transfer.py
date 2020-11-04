@@ -17,23 +17,23 @@ class ParentWindow(Frame):
         self.master.config(bg='lightgray')
 
 
-        self.varFName = StringVar()
-        self.varLName = StringVar()
+        self.varBrowse = StringVar()
+        self.varBrowse1 = StringVar()
 
-        self.lblFName = Button(self.master,text='Browse... ',font=("Helvetica", 12), fg='Black', bg='lightgray')
-        self.lblFName.grid(row=0, column=0, padx=(30,0), pady=(30,0))
+        self.lblBrowse = Button(self.master,text='Browse... ',font=("Helvetica", 12), fg='Black', bg='lightgray')
+        self.lblBrowse.grid(row=0, column=0, padx=(30,0), pady=(30,0))
 
-        self.lblLName = Button(self.master,text='Browse... ',font=("Helvetica", 12), fg='Black', bg='lightgray')
-        self.lblLName.grid(row=1, column=0, padx=(30,0), pady=(30,0))
+        self.lblBrowse1 = Button(self.master,text='Browse... ',font=("Helvetica", 12), fg='Black', bg='lightgray')
+        self.lblBrowse1.grid(row=1, column=0, padx=(30,0), pady=(30,0))
 
         self.lblDisplay = Label(self.master,text='',font=("Helvetica", 16), fg='white', bg='lightgray')
         self.lblDisplay.grid(row=3, column=1, padx=(30,0), pady=(30,0))
 
-        self.txtFName = Entry(self.master, text=self.varFName, font=("Helvetica", 16), fg='black', bg='white')
-        self.txtFName.grid(row=0, column=1, padx=(30,0), pady=(30,0))
+        self.txtBrowse = Entry(self.master, text=self.varBrowse, font=("Helvetica", 16), fg='black', bg='white')
+        self.txtBrowse.grid(row=0, column=1, padx=(30,0), pady=(30,0))
 
-        self.txtLName = Entry(self.master, text=self.varLName, font=("Helvetica", 16), fg='black', bg='white')
-        self.txtLName.grid(row=1,column=1, padx=(30,0), pady=(30,0))
+        self.txtBrowse1 = Entry(self.master, text=self.varBrowse1, font=("Helvetica", 16), fg='black', bg='white')
+        self.txtBrowse1.grid(row=1,column=1, padx=(30,0), pady=(30,0))
 
         self.btnSubmit = Button(self.master, text="Check for files...", width=15, height=2, command=self.submit)
         self.btnSubmit.grid(row=2,column=0, padx=(30,0), pady=(30,0), sticky=NE)
@@ -41,27 +41,29 @@ class ParentWindow(Frame):
         self.btnCancel = Button(self.master, text="Close Program", width=15, height=2, command=self.cancel)
         self.btnCancel.grid(row=2,column=2, padx=(30,90), pady=(30,0), sticky=NE)
 
-    def askdirectory(self):
-          """Returns a selected directoryname."""
+    def src_directory(self): #we don't want to name it askdirectory, as that exists in tkinter
+       src= tkFileDialog.askdirectory(self.txtBrowse) #this creates a variable to which the user's selection will be stored
+       self.txtBrowse.Insert(0, src)
 
-    print(tkFileDialog.askdirectory(self.path))
+    def src_directory(self): #we don't want to name it askdirectory, as that exists in tkinter
+       src= tkFileDialog.askdirectory(self.txtBrowse1) #this creates a variable to which the user's selection will be stored
+       self.txtBrowse1.Insert(0, src)
+                                                      
+    def submit(self):
+       path = self.txtBrowse.get()
+       path2 = self.txtBrowse1.get()
+       dir_list = os.listdir(path)
+       print(os.path.join(path, "*.txt"))
+       print("Files and directories in '", path, "' :")
+
+       print(dir_list)
 
       
-
-    def submit(self):
-        fn = self.varFName.get()
-        ln = self.varLName.get()
-        self.lbl.Display.config(text='Hello {} {}!'.format(fn,ln))
+           
 
     def cancel(self):
         self.master.destroy()
             
-path = '/Users/Jerem/Desktop/FolderA/'
-dir_list = os.listdir(path)
-print(os.path.join(path, "*.txt"))
-print("Files and directories in '", path, "' :")
-
-print(dir_list)
 
 
 
