@@ -12,39 +12,46 @@ class ParentWindow(Frame):
 
         self.master = master
         self.master.resizable(width=True, height=True)
-        self.master.geometry('{}x{}'.format (500, 300))
-        self.master.title('File Transfer ')
-        self.master.config(bg='Orange')
+        self.master.geometry('{}x{}'.format (700, 400))
+        self.master.title('Check Files ')
+        self.master.config(bg='lightgray')
 
 
         self.varFName = StringVar()
-      
-        self.lblFName = Label(self.master,text='Daily File Check: ',font=("Helvetica", 16), fg='white', bg='Orange')
+        self.varLName = StringVar()
+
+        self.lblFName = Button(self.master,text='Browse... ',font=("Helvetica", 12), fg='Black', bg='lightgray')
         self.lblFName.grid(row=0, column=0, padx=(30,0), pady=(30,0))
 
-        self.lblDisplay = Label(self.master,text='',font=("Helvetica", 16), fg='white', bg='Orange')
-        self.lblDisplay.grid(row=4, column=1, padx=(30,0), pady=(30,0))
+        self.lblLName = Button(self.master,text='Browse... ',font=("Helvetica", 12), fg='Black', bg='lightgray')
+        self.lblLName.grid(row=1, column=0, padx=(30,0), pady=(30,0))
 
-        self.txtFName = Entry(self.master, text=self.varFName, font=("Helvetica", 16), fg='black', bg='lightgray')
+        self.lblDisplay = Label(self.master,text='',font=("Helvetica", 16), fg='white', bg='lightgray')
+        self.lblDisplay.grid(row=3, column=1, padx=(30,0), pady=(30,0))
+
+        self.txtFName = Entry(self.master, text=self.varFName, font=("Helvetica", 16), fg='black', bg='white')
         self.txtFName.grid(row=0, column=1, padx=(30,0), pady=(30,0))
 
-        self.btnSubmit = Button(self.master, text="Browse Files", width=10, height=2, command=self.browse)
-        self.btnSubmit.grid(row=2,column=1, padx=(30,0), pady=(30,0), sticky=NE)
+        self.txtLName = Entry(self.master, text=self.varLName, font=("Helvetica", 16), fg='black', bg='white')
+        self.txtLName.grid(row=1,column=1, padx=(30,0), pady=(30,0))
 
-        self.btnCancel = Button(self.master, text="Cancel", width=10, height=2, command=self.cancel)
-        self.btnCancel.grid(row=2,column=1, padx=(30,90), pady=(30,0), sticky=NE)
+        self.btnSubmit = Button(self.master, text="Check for files...", width=15, height=2, command=self.submit)
+        self.btnSubmit.grid(row=2,column=0, padx=(30,0), pady=(30,0), sticky=NE)
 
-    def browse(self):
-          l = "/Users/Jerem/Desktop/FolderA/"
-          for text in l:
-                if(text == ".txt"):
-                      break;
-          else:
-                  print(letter)
+        self.btnCancel = Button(self.master, text="Close Program", width=15, height=2, command=self.cancel)
+        self.btnCancel.grid(row=2,column=2, padx=(30,90), pady=(30,0), sticky=NE)
 
+    def askdirectory(self):
+          """Returns a selected directoryname."""
 
-                  fn = self.varFName.get()
-                  self.lbl.Display.config(text='{}'.())
+    print(tkFileDialog.askdirectory(self.path))
+
+      
+
+    def submit(self):
+        fn = self.varFName.get()
+        ln = self.varLName.get()
+        self.lbl.Display.config(text='Hello {} {}!'.format(fn,ln))
 
     def cancel(self):
         self.master.destroy()
